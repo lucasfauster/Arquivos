@@ -10,7 +10,7 @@ typedef struct{
 }Cliente;
 
 Cliente * consulta(char cpf[11], FILE *f){
-  fseek(f, 41, SEEK_SET); //pula o nome do primeiro registro
+  fseek(f, 40, SEEK_SET); //pula o nome do primeiro registro
   char cpf_atual[11];
   int tam_pulo = (sizeof(int)*2) + sizeof(float) + 40; //distância até o cpf do próximo registro
 
