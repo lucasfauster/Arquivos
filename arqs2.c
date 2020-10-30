@@ -10,13 +10,14 @@ FILE * junta_arq(FILE *a, FILE *b){
       fwrite(palavraA, sizeof(char), 10, c);
       fwrite(palavraB, sizeof(char), 10, c);
     }
+    rewind(b);
   }
   return c;
 }
 
 void main(){
-  FILE *a = fopen("a.bin", "wb+");
-  FILE *b = fopen("b.bin", "wb+");
-  
+  FILE *a = fopen("a.bin", "rb");
+  FILE *b = fopen("b.bin", "rb");
+
   FILE *c = junta_arq(a, b);
 }
