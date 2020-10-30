@@ -37,17 +37,16 @@ int calculaTamanho(FILE *f){
 Cliente * procuraMenorSaldo(FILE *f, Cliente * cli){
   Cliente * atual = (Cliente*)malloc(sizeof(Cliente));
   Cliente * candidato = cli; // candidato a ser o cliente de menor saldo
-  int posCandidato;
+  int posCandidato = 0;
 
-  while(!feof(f)){// le todos os registros desdo comeco
-    fread(atual->nome, sizeof(char), 40, f);
+  while(fread(atual->nome, sizeof(char), 40, f) != 0){// le todos os registros desdo comeco
     fread(atual->cpf, sizeof(char), 11, f);
     fread(atual->conta_corrente, sizeof(int), 1, f);
     fread(atual->agencia, sizeof(int), 1, f);
     fread((void*)&atual->saldo, sizeof(float), 1, f); // gambiarra para ler floats do arquivo
 
     if(atual->saldo && atual->saldo < candidato->saldo){ // compara o saldo do registro lido
-      candidato = atual; // atualiza o menor encontrado até agora
+      candidato = atual; // atualiza o menor cliente encontrado até agora
       posCandidato = ftell(f);
     }
   }
@@ -70,7 +69,7 @@ FILE * ordenaPorSaldo(FILE *f){
     fwrite(candidato, sizeof(Cliente), 1, f);
     candidato = lerPrimeiro(f);
   }
-  
+
   return saida;
 }
 
