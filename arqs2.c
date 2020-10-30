@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-FILE * junta_arq(FILE *a, FILE *b){
+void junta_arq(FILE *a, FILE *b){
   FILE *c = fopen("c.bin", "wb");
   char palavraA[10];
   char palavraB[10];
@@ -12,15 +12,15 @@ FILE * junta_arq(FILE *a, FILE *b){
     }
     rewind(b);
   }
-  return c;
+  fclose(c);
 }
 
 void main(){
   FILE *a = fopen("a.bin", "rb");
   FILE *b = fopen("b.bin", "rb");
 
-  FILE *c = junta_arq(a, b);
+  junta_arq(a, b);
+  
   fclose(a);
   fclose(b);
-  fclose(c);
 }
