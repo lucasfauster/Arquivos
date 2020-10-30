@@ -20,4 +20,7 @@ void main(){
   FILE *b = fopen("b.bin", "rb");
 
   FILE *c = junta_arq(a, b);
+  fclose(a);
+  fclose(b);
+  fclose(c);
 }
